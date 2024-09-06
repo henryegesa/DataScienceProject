@@ -1,0 +1,33 @@
+#Query 1: Find all unique launch sites.
+SELECT DISTINCT launch_site FROM spacex_launches;
+
+#Query 2: Calculate the total payload mass launched by SpaceX from NASA.
+SELECT SUM(payload_mass_kg) 
+FROM spacex_launches 
+WHERE customer = 'NASA';
+
+#Query 3: Find the launch dates for all successful launches.
+SELECT launch_date 
+FROM spacex_launches 
+WHERE launch_success = TRUE;
+
+#Query 4: Count the number of launches by each orbit type.
+SELECT orbit_type, COUNT(*) as num_launches 
+FROM spacex_launches 
+GROUP BY orbit_type;
+
+#Query 5: Find all launch sites with the prefix 'CCA'.
+SELECT * FROM spacex_launches 
+WHERE launch_site LIKE 'CCA%';
+
+#Query 6: Calculate the average payload mass carried by F9 v1.1 boosters.
+SELECT AVG(payload_mass_kg) 
+FROM spacex_launches 
+WHERE booster_version = 'F9 v1.1';
+
+#Query 7: Rank the landing outcomes between two specific dates.
+SELECT landing_outcome, COUNT(*) as count 
+FROM spacex_launches 
+WHERE launch_date BETWEEN '2010-06-04' AND '2017-03-20' 
+GROUP BY landing_outcome 
+ORDER BY count DESC;
