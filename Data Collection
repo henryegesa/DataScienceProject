@@ -1,0 +1,45 @@
+# Importing necessary libraries to make a sample API request and generate a flowchart for data collection
+import pandas as pd
+import matplotlib.pyplot as plt
+import requests
+
+# Generate synthetic data to simulate SpaceX API response
+data = {
+    'flight_number': [1, 2, 3, 4, 5],
+    'launch_site': ['CCAFS LC-40', 'VAFB SLC-4E', 'KSC LC-39A', 'CCAFS LC-40', 'KSC LC-39A'],
+    'payload_mass_kg': [5000, 12000, 8000, 6000, 10000],
+    'orbit_type': ['LEO', 'GTO', 'LEO', 'LEO', 'GTO'],
+    'launch_success': [True, False, True, True, False]
+}
+
+# Convert synthetic data to DataFrame to simulate wrangling process
+df_spacex = pd.DataFrame(data)
+
+# Sample JSON response format for SpaceX API
+sample_response = {
+    "flight_number": 1,
+    "mission_name": "FalconSat-2",
+    "launch_site": {
+        "site_name": "CCAFS LC-40"
+    },
+    "payload_mass_kg": 5000,
+    "orbit_type": "LEO",
+    "launch_success": True
+}
+
+# Generate the flowchart
+fig, ax = plt.subplots(figsize=(8, 6))
+plt.text(0.5, 0.8, 'Start', fontsize=12, ha='center', bbox=dict(facecolor='lightblue', alpha=0.5))
+plt.text(0.5, 0.6, 'API Request', fontsize=12, ha='center', bbox=dict(facecolor='lightgreen', alpha=0.5))
+plt.text(0.5, 0.4, 'Get Launch Data', fontsize=12, ha='center', bbox=dict(facecolor='lightyellow', alpha=0.5))
+plt.text(0.5, 0.2, 'Parse JSON', fontsize=12, ha='center', bbox=dict(facecolor='lightpink', alpha=0.5))
+plt.text(0.5, 0.0, 'Store Data in DataFrame', fontsize=12, ha='center', bbox=dict(facecolor='orange', alpha=0.5))
+plt.arrow(0.5, 0.75, 0, -0.1, head_width=0.05, head_length=0.05, fc='k', ec='k')
+plt.arrow(0.5, 0.55, 0, -0.1, head_width=0.05, head_length=0.05, fc='k', ec='k')
+plt.arrow(0.5, 0.35, 0, -0.1, head_width=0.05, head_length=0.05, fc='k', ec='k')
+plt.arrow(0.5, 0.15, 0, -0.1, head_width=0.05, head_length=0.05, fc='k', ec='k')
+plt.axis('off')
+plt.title('Data Collection Flowchart - SpaceX API')
+plt.show()
+
+df_spacex.head()  # Displaying the synthetic data to user
