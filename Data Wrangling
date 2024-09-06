@@ -1,0 +1,33 @@
+# Handling missing values and performing feature engineering on the synthetic SpaceX dataset
+
+# Step 1: Check for missing values (simulated process, none in our synthetic data)
+missing_values = df_spacex.isnull().sum()
+
+# Step 2: Feature Engineering - Create a binary column for launch success
+df_spacex['launch_success_flag'] = df_spacex['launch_success'].apply(lambda x: 1 if x else 0)
+
+# Step 3: Simulate aggregation - Calculate average payload per launch site
+avg_payload_per_site = df_spacex.groupby('launch_site')['payload_mass_kg'].mean()
+
+# Generate flowchart for data wrangling process
+fig, ax = plt.subplots(figsize=(8, 6))
+plt.text(0.5, 0.85, 'Start', fontsize=12, ha='center', bbox=dict(facecolor='lightblue', alpha=0.5))
+plt.text(0.5, 0.7, 'Load Data', fontsize=12, ha='center', bbox=dict(facecolor='lightgreen', alpha=0.5))
+plt.text(0.5, 0.55, 'Handle Missing Values', fontsize=12, ha='center', bbox=dict(facecolor='lightyellow', alpha=0.5))
+plt.text(0.5, 0.4, 'Format & Standardize', fontsize=12, ha='center', bbox=dict(facecolor='lightpink', alpha=0.5))
+plt.text(0.5, 0.25, 'Feature Engineering', fontsize=12, ha='center', bbox=dict(facecolor='orange', alpha=0.5))
+plt.text(0.5, 0.1, 'Data Transformation', fontsize=12, ha='center', bbox=dict(facecolor='lightblue', alpha=0.5))
+plt.text(0.5, -0.05, 'Export Clean Data', fontsize=12, ha='center', bbox=dict(facecolor='lightgreen', alpha=0.5))
+
+# Adding arrows between the steps
+plt.arrow(0.5, 0.8, 0, -0.1, head_width=0.05, head_length=0.05, fc='k', ec='k')
+plt.arrow(0.5, 0.65, 0, -0.1, head_width=0.05, head_length=0.05, fc='k', ec='k')
+plt.arrow(0.5, 0.5, 0, -0.1, head_width=0.05, head_length=0.05, fc='k', ec='k')
+plt.arrow(0.5, 0.35, 0, -0.1, head_width=0.05, head_length=0.05, fc='k', ec='k')
+plt.arrow(0.5, 0.2, 0, -0.1, head_width=0.05, head_length=0.05, fc='k', ec='k')
+
+plt.axis('off')
+plt.title('Data Wrangling Process Flowchart')
+plt.show()
+
+import ace_tools as tools; tools.display_dataframe_to_user(name="Average Payload Mass Per Launch Site", dataframe=avg_payload_per_site)
