@@ -1,0 +1,69 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Sample synthetic data for plotting
+data = {
+    'flight_number': [1, 2, 3, 4, 5],
+    'launch_site': ['CCAFS LC-40', 'VAFB SLC-4E', 'KSC LC-39A', 'CCAFS LC-40', 'KSC LC-39A'],
+    'payload_mass_kg': [5000, 12000, 8000, 6000, 10000],
+    'orbit_type': ['LEO', 'GTO', 'LEO', 'LEO', 'GTO'],
+    'launch_success': [True, False, True, True, False]
+}
+
+df_spacex = pd.DataFrame(data)
+
+# 1. Scatter Plot: Flight Number vs. Launch Site
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='flight_number', y='launch_site', data=df_spacex)
+plt.title('Flight Number vs. Launch Site')
+plt.xlabel('Flight Number')
+plt.ylabel('Launch Site')
+plt.show()
+
+# 2. Scatter Plot: Payload vs. Launch Site
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='payload_mass_kg', y='launch_site', data=df_spacex)
+plt.title('Payload vs. Launch Site')
+plt.xlabel('Payload Mass (kg)')
+plt.ylabel('Launch Site')
+plt.show()
+
+# 3. Bar Chart: Success Rate vs. Orbit Type
+success_rate = df_spacex.groupby('orbit_type')['launch_success'].mean().reset_index()
+
+plt.figure(figsize=(8, 6))
+sns.barplot(x='orbit_type', y='launch_success', data=success_rate)
+plt.title('Success Rate vs. Orbit Type')
+plt.xlabel('Orbit Type')
+plt.ylabel('Success Rate')
+plt.ylim(0, 1)
+plt.show()
+
+# 4. Scatter Plot: Flight Number vs. Orbit Type
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='flight_number', y='orbit_type', data=df_spacex)
+plt.title('Flight Number vs. Orbit Type')
+plt.xlabel('Flight Number')
+plt.ylabel('Orbit Type')
+plt.show()
+
+# 5. Scatter Plot: Payload vs. Orbit Type
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='payload_mass_kg', y='orbit_type', data=df_spacex)
+plt.title('Payload vs. Orbit Type')
+plt.xlabel('Payload Mass (kg)')
+plt.ylabel('Orbit Type')
+plt.show()
+
+# 6. Line Chart: Launch Success Yearly Trend
+# Adding sample data for year and success rate
+df_spacex['year'] = [2018, 2019, 2020, 2021, 2022]  # Sample years
+yearly_trend = df_spacex.groupby('year')['launch_success'].mean().reset_index()
+
+plt.figure(figsize=(8, 6))
+sns.lineplot(x='year', y='launch_success', data=yearly_trend)
+plt.title('Launch Success Yearly Trend')
+plt.xlabel('Year')
+plt.ylabel('Success Rate')
+plt.ylim(0, 1)
+plt.show()
